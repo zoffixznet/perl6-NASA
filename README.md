@@ -4,32 +4,18 @@
 
 NASA - use NASA's APIs via Perl 6
 
-# SYNOPSIS
-
-```perl6
-use NASA;
-my NASA $t .= new: :key<drH7437T55HSV266UJ77TxhoT>;
-```
-
 # DESCRIPTION
 
 This module lets you use APIs provided by NASA (National Aeronautics and
 Space Administration). For descriptions of APIs and to obtain the API key,
 see [https://api.nasa.gov/]()
 
-# METHODS
+# APIs
 
-## `new`
+NASA provides several APIs, each of which is contained in its own module
+within this distribution. See their READMEs for interface details:
 
-```perl6
-use NASA;
-my NASA $t .= new; # use rate-limited keyless operation
-my NASA $t .= new: :key<drH7437T55HSV266UJ77TxhoT>; # use your own API key
-```
-
-Constructs and returns a new `NASA` object. Takes one **optional**
-argument: `key`. To get your API key, visit [https://api.nasa.gov/index.html#apply-for-an-api-key](). If no key is provided,
-`DEMO_KEY` will be used, which is a rate-limited key provided by NASA.
+* [README-APOD.md](APOD: Astronomy Picture of the Day)
 
 ----
 

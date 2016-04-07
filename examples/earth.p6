@@ -1,4 +1,4 @@
 use lib 'lib';
 
-use NASA;
-my NASA $t .= new: key => 'key'.IO.slurp;
+use NASA::APOD;
+my NASA::APOD $nasa .= new: key => 'key'.IO.slurp;
