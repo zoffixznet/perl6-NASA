@@ -23,11 +23,13 @@ see [https://api.nasa.gov/]()
 
 ```perl6
 use NASA;
-my NASA $t .= new: :key<drH7437T55HSV266UJ77TxhoT>;
+my NASA $t .= new; # use rate-limited keyless operation
+my NASA $t .= new: :key<drH7437T55HSV266UJ77TxhoT>; # use your own API key
 ```
 
-Constructs and returns a new `NASA` object. Takes one **mandatory**
-argument: `key`. To get your API key, visit [https://api.nasa.gov/index.html#apply-for-an-api-key]()
+Constructs and returns a new `NASA` object. Takes one **optional**
+argument: `key`. To get your API key, visit [https://api.nasa.gov/index.html#apply-for-an-api-key](). If no key is provided,
+`DEMO_KEY` will be used, which is a rate-limited key provided by NASA.
 
 ----
 
