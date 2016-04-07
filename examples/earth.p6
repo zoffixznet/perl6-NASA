@@ -1,6 +1,4 @@
 use lib 'lib';
 
-use Twitter;
-my Twitter $t .= new: |EVALFILE 'keys';
-
-$t.tweet: 'Testing';
+use NASA;
+my NASA $t .= new: key => 'key'.IO.slurp;
