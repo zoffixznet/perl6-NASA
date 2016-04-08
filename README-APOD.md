@@ -28,7 +28,7 @@ my NASA::APOD $t .= new: :key<drH7437T55HSV266UJ77TxhoT>; # use your own API key
 ```
 
 Constructs and returns a new `NASA::APOD` object. Takes one **optional**
-argument: `key`. To get your API key, visit [https://api.nasa.gov/index.html#apply-for-an-api-key](). If no key is provided,
+argument: `key`. To get your API key, visit [](https://api.nasa.gov/index.html#apply-for-an-api-key). If no key is provided,
 `DEMO_KEY` will be used, which is a rate-limited key provided by NASA. It allows
 only 50 queries per day (30 per hour).
 
