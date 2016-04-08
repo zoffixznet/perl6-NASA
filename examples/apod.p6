@@ -1,6 +1,6 @@
 use lib 'lib';
 
 use NASA::APOD;
-my NASA::APOD $nasa .= new: key => 'key'.IO.slurp;
+my NASA::APOD $apod .= new: key => 't/key'.IO.lines[0];
 
-say $nasa;
+say $apod;

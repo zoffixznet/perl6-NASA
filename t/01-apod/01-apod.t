@@ -58,6 +58,9 @@ subtest {
     is $res<service_version>, 'v1', 'service_version is correct';
 }, 'testing .apod with no arguments';
 
+is $apod.Str.WHAT,  Str, 'calling .Str without a date works';
+is $apod.gist.WHAT, Str, 'calling .gist without a date works';
+
 my $*NASA-TESTING-TODAY = '2016-04-04';
 is $apod.Str,  "%expected<title>: %expected<hdurl>", '.Str is sane';
 is $apod.gist, "%expected<title>: %expected<url>",   '.gist is sane';

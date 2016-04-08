@@ -15,11 +15,11 @@ multi method apod (Dateish $date?, Bool :$hd = True) {
 }
 
 method Str {
-    my $res = self.apod: $*NASA-TESTING-TODAY // Empty;
+    my $res = self.apod: |($*NASA-TESTING-TODAY // Empty);
     return "$res<title>: $res<hdurl>";
 }
 
 method gist {
-    my $res = self.apod: $*NASA-TESTING-TODAY // Empty;
+    my $res = self.apod: |($*NASA-TESTING-TODAY // Empty);
     return "$res<title>: $res<url>";
 }
