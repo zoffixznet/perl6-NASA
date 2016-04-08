@@ -15,7 +15,19 @@ see [https://api.nasa.gov/]()
 NASA provides several APIs, each of which is contained in its own module
 within this distribution. See their READMEs for interface details:
 
+### Implemented
+
 * [README-APOD.md](APOD: Astronomy Picture of the Day)
+* [README-Mars-Rover.md](Mars Rover Photos)
+
+### Not Implemented Yet
+
+There are many APIs and not all will be implemented. These are planned to
+be implemented, but aren't yet:
+
+* [https://api.nasa.gov/api.html#NeoWS](Near Earth Object Web Service)
+* [https://api.nasa.gov/api.html#earth](The Earth Observatory Natural Event Tracker)
+* [https://api.nasa.gov/api.html#sounds](Space Sounds)
 
 ----
 
