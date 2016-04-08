@@ -6,11 +6,13 @@
     "depends"      : [
         "HTTP::Tinyish",
         "JSON::Fast",
-        "URI::Escape",
-        "URI"
+        "URI::Escape"
     ],
-    "test-depends" : [ "Test"],
+    "test-depends" : [ "Test" ],
     "provides"     : {
+        "NASA" : "lib/NASA.pm6",
+        "NASA::UA" : "lib/NASA/UA.pm6",
+        "NASA::APOD" : "lib/NASA/APOD.pm6"
     },
     "authors"      : [ "Zoffix Znet" ],
     "source-url"   : "git://github.com/zoffixznet/perl6-NASA.git"
