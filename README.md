@@ -18,6 +18,7 @@ within this distribution. See their READMEs for interface details:
 ### Implemented
 
 * [APOD: Astronomy Picture of the Day](README-APOD.md)
+* [Mars Rover Photos](README-MARS-ROVERS.md)
 
 ### Not Implemented Yet
 

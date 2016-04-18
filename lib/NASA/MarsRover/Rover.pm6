@@ -35,22 +35,36 @@ method query (
     $sol or $earth-date
         or fail 'You must provide either Sol or Earth Date';
         
-    my %cameras =
+    my %valid-cams =
         curiosity   => set(<FHAZ RHAZ MAST CHEMCAM MAHLI MARDI NAVCAM>),
         opportunity => set(<FHAZ RHAZ NAVCAM PANCAM MINITES>),
         spirit      => set(<FHAZ RHAZ NAVCAM PANCAM MINITES>);
 
     if ( $camera ) {
-        %cameras{ $!name }{ $camera } or
+        %valid-cams{ $!name }{ $camera } or
             fail "Rover $!name does not have $camera camera";
     }
 
-    self!request: 'GET', $!api-url
+    my $res = self!request: 'GET', $!api-url
         ~ uri-escape($!name) ~ '/photos',
         |(sol        => $sol        if $sol       ),
         |(earth_date => $earth-date if $earth-date),
         |(camera     => $camera     if $camera    ),
         |(page       => $page       if $page      );
+
+    my $rover = $res<photos>[0]<rover>;
+    my %cameras;
+    for |$res<photos> {
+        %cameras{ .<camera><name> }<photos>.push: %(
+            id      => .<id>,
+            img_src => .<img_src>,
+        );
+        %cameras{ .<camera><name> }<full_name  id  name  rover_id>
+        = .<camera><full_name  id  name  rover_id>;
+
+    }
+
+    return { rover => $rover, cameras => %cameras };
 }
 
 
