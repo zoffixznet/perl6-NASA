@@ -4,7 +4,7 @@ use HTTP::Tinyish;
 use JSON::Fast;
 use URI::Escape;
 
-has Str $.key;
+has Str $.key = 'DEMO_KEY';
 has $!ua      = HTTP::Tinyish.new(agent => "Perl 6 NASA.pm6");
 
 method !request ($method, $url, *%params) {

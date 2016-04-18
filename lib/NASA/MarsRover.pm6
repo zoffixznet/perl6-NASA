@@ -1,5 +1,15 @@
-use NASA::UA;
-unit role NASA::MarsRover does NASA::UA;
+use NASA::MarsRover::Rover;
+unit role NASA::MarsRover;
+
+has Str $.key;
+
+method curiosity {
+    NASA::MarsRover::Rover.new:
+        :$!key,
+        :name<curiosity>;
+}
+
+=finish
 
 my subset RoverDate of Str
     where { m/^ \d**4 '-' \d**2 '-' \d**2 $/ or warn 'Date format is YYYY-MM-DD' };
