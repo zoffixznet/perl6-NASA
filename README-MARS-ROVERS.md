@@ -7,98 +7,81 @@ NASA::MarsRover - use NASA's `Mars Rover Photos` API
 # SYNOPSIS
 
 ```perl6
-use NASA::MarsRover;
-my NASA::MarsRover $rovers .= new: :key<drH7437T55HSV266UJ77TxhoT>;
+use NASA::MarsRovers;
+my NASA::MarsRovers $rovers .= new: :key<drH7437T55HSV266UJ77TxhoT>;
 
 my $sol = $rovers.curiosity.query: :0sol;
 
-say "See this cool landing-day photo: {}"
+say "See this cool landing-day photo: $sol<cameras><FHAZ>[0]<img_src>";
 ```
 # DESCRIPTION
 
-Access photographs from several cameras installed on the three
-Mars rovers.
+Access photographs from several cameras installed on the three Mars rovers.
 
 # METHODS
 
 ## `new`
 
 ```perl6
-use NASA::APOD;
-my NASA::APOD $t .= new; # use severely rate-limited keyless operation
-my NASA::APOD $t .= new: :key<drH7437T55HSV266UJ77TxhoT>; # use your own API key
+use NASA::MarsRovers;
+my NASA::MarsRovers $mars .= new; # use severely rate-limited keyless operation
+my NASA::MarsRovers $mars .= new: :key<drH7437T55HSV266UJ77TxhoT>; # use your own API key
 ```
 
-Constructs and returns a new `NASA::APOD` object. Takes one **optional**
+Constructs and returns a new `NASA::MarsRovers` object. Takes one **optional**
 argument: `key`. To get your API key, visit [](https://api.nasa.gov/index.html#apply-for-an-api-key). If no key is provided,
 `DEMO_KEY` will be used, which is a rate-limited key provided by NASA. It allows
 only 50 queries per day (30 per hour).
 
-## Rover Methods
+## `.ROVER.query`
 
 ```perl6
-    $
-```
+    say $mars.curiosity.query: :0sol;
 
-## `.ROVER.query`
+    my $oppy = $mars.opportunity;
+    say $oppy.query:
+        :earth-date<2012-08-06>,
+        :camera<FHAZ>
+        :2page;
+
+    method query (
+        Sol       :$sol,
+        EarthDate :$earth-date,
+        RoverCam  :$camera,
+        Int       :$page,
+    ) {
+```
 
 ```perl6
 {
   cameras => {
-    MAHLI  => {
-      full_name => "Mars Hand Lens Imager".Str,
-      id        => 24.Int,
-      name      => "MAHLI".Str,
-      photos    => [
-        {
-          id      => 86521.Int,
-          img_src => "http://mars.jpl.nasa.gov/msl-raw-images/msss/00001/mhli/0001MH0000001000E1_DXXX.jpg".Str,
-        },
-        {
-          id      => 86522.Int,
-          img_src => "http://mars.jpl.nasa.gov/msl-raw-images/msss/00001/mhli/0001MH0000001000E2_DXXX.jpg".Str,
-        },
-      ],
-      rover_id  => 5.Int,
-    },
-  },
-  rover   => {
-    cameras      => [
+    CHEMCAM => [
       {
-        full_name => "Front Hazard Avoidance Camera".Str,
-        name      => "FHAZ".Str,
+        id      => 3133.Int,
+        img_src => "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00000/opgs/edr/ccam/CR0_397506222EDR_F0010008CCAM00000M_.JPG".Str,
       },
       {
-        full_name => "Navigation Camera".Str,
-        name      => "NAVCAM".Str,
-      },
-      {
-        full_name => "Mast Camera".Str,
-        name      => "MAST".Str,
-      },
-      {
-        full_name => "Chemistry and Camera Complex".Str,
-        name      => "CHEMCAM".Str,
-      },
-      {
-        full_name => "Mars Hand Lens Imager".Str,
-        name      => "MAHLI".Str,
-      },
-      {
-        full_name => "Mars Descent Imager".Str,
-        name      => "MARDI".Str,
-      },
-      {
-        full_name => "Rear Hazard Avoidance Camera".Str,
-        name      => "RHAZ".Str,
+        id      => 58889.Int,
+        img_src => "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00000/opgs/edr/ccam/CR0_397506434EDR_F0010008CCAM00000M_.JPG".Str,
       },
     ],
-    id           => 5.Int,
+    ...
+  },
+  rover   => {
+    cameras      => {
+      CHEMCAM => "Chemistry and Camera Complex".Str,
+      FHAZ    => "Front Hazard Avoidance Camera".Str,
+      MAHLI   => "Mars Hand Lens Imager".Str,
+      MARDI   => "Mars Descent Imager".Str,
+      MAST    => "Mast Camera".Str,
+      NAVCAM  => "Navigation Camera".Str,
+      RHAZ    => "Rear Hazard Avoidance Camera".Str,
+    },
     landing_date => "2012-08-06".Str,
-    max_date     => "2016-04-17".Str,
-    max_sol      => 1314.Int,
+    max_date     => "2016-04-19".Str,
+    max_sol      => 1316.Int,
     name         => "Curiosity".Str,
-    total_photos => 250163.Int,
+    total_photos => 250619.Int,
   },
 }
 ```

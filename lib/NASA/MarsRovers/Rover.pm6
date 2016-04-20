@@ -1,7 +1,7 @@
 use NASA::UA;
 use Subset::Helper;
 use URI::Escape;
-unit role NASA::MarsRover::Rover does NASA::UA;
+unit role NASA::MarsRovers::Rover does NASA::UA;
 
 my constant $rovers = set <curiosity opportunity spirit>;
 my constant $cams = set <FHAZ RHAZ MAST CHEMCAM MAHLI MARDI NAVCAM PANCAM MINITES>;
@@ -29,12 +29,12 @@ method query (
     RoverCam  :$camera,
     Int       :$page,
 ) {
-    $sol and $earth-date
+    $sol.defined and $earth-date
         and fail 'You must provide either Sol or Earth Date, not both';
 
-    $sol or $earth-date
+    $sol.defined or $earth-date
         or fail 'You must provide either Sol or Earth Date';
-        
+
     my %valid-cams =
         curiosity   => set(<FHAZ RHAZ MAST CHEMCAM MAHLI MARDI NAVCAM>),
         opportunity => set(<FHAZ RHAZ NAVCAM PANCAM MINITES>),
@@ -47,24 +47,26 @@ method query (
 
     my $res = self!request: 'GET', $!api-url
         ~ uri-escape($!name) ~ '/photos',
-        |(sol        => $sol        if $sol       ),
-        |(earth_date => $earth-date if $earth-date),
-        |(camera     => $camera     if $camera    ),
-        |(page       => $page       if $page      );
+        |(sol        => $sol        if $sol.defined),
+        |(earth_date => $earth-date if $earth-date ),
+        |(camera     => $camera     if $camera     ),
+        |(page       => $page       if $page       );
 
     my $rover = $res<photos>[0]<rover>;
+    my %rover-cams;
+    %rover-cams{ .<name> } = .<full_name> for |($rover<cameras> || []);
+    $rover<cameras> = %rover-cams;
+    $rover<id>:delete;
+
     my %cameras;
     for |$res<photos> {
-        %cameras{ .<camera><name> }<photos>.push: %(
+        %cameras{ .<camera><name> }.push: %(
             id      => .<id>,
             img_src => .<img_src>,
         );
-        %cameras{ .<camera><name> }<full_name  id  name  rover_id>
-        = .<camera><full_name  id  name  rover_id>;
-
+#        %cameras{ .<camera><name> }<full_name  id  name>
+#        = .<camera><full_name  id  name>;
     }
 
     return { rover => $rover, cameras => %cameras };
 }
-
-

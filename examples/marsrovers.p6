@@ -1,12 +1,20 @@
 use lib 'lib';
-use NASA::MarsRover;
+use NASA::MarsRovers;
 
-my NASA::MarsRover $rovers .= new: key => 't/key'.IO.lines[0];
+my NASA::MarsRovers $rovers .= new: key => 't/key'.IO.lines[0];
 
 use Data::Dump;
-my $res = $rovers.curiosity.query: :1sol;
-#$res<photos> = [ $res<photos>[0] ];
+my $oppy = $rovers.opportunity;
+say Dump $oppy.query:
+    #:1sol,
+    :earth-date<2012-08-06>,
+    :camera<FHAZ>
+    #:1page;
 
+=finish
+
+use Data::Dump;
+my $res = $rovers.curiosity.query: :0sol;
 say Dump $res;
 
 
