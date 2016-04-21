@@ -52,7 +52,7 @@ method query (
         |(camera     => $camera     if $camera     ),
         |(page       => $page       if $page       );
 
-    my $rover = $res<photos>[0]<rover>;
+    my $rover = $res.hash.<photos>[0]<rover>;
     my %rover-cams;
     %rover-cams{ .<name> } = .<full_name> for |($rover<cameras> || []);
     $rover<cameras> = %rover-cams;

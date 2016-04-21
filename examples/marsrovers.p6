@@ -8,7 +8,7 @@ my $oppy = $rovers.opportunity;
 say Dump $oppy.query:
     #:1sol,
     :earth-date<2012-08-06>,
-    :camera<FHAZ>
+    #:camera<FHAZ>
     #:1page;
 
 =finish
