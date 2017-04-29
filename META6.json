@@ -10,7 +10,7 @@
         "URI::Escape",
         "Subset::Helper"
     ],
-    "test-depends" : [ "Test" ],
+    "test-depends" : [ "Test", "Test::META" ],
     "provides"     : {
         "NASA" : "lib/NASA.pm6",
         "NASA::UA" : "lib/NASA/UA.pm6",
