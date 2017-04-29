@@ -1,6 +1,7 @@
 {
     "perl"         : "6.c",
     "name"         : "NASA",
+    "license"      : "Artistic-2.0",
     "version"      : "1.001001",
     "description"  : "use NASA's APIs via Perl 6",
     "depends"      : [
