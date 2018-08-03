@@ -3,8 +3,8 @@ use Test;
 use NASA::APOD;
 
 my %expected =
-    copyright => "Arnar Kristjansson",
-    date => "2016-4-4",
+    copyright => "Arnar Kristjansson Rollover Annotation: Judy Schmidt",
+    date => "2016-04-04",
     explanation => "Is this the real world?  Or is it just fantasy?"
         ~ "  The truth started with a dream -- a dream that the spectacular"
         ~ " Seljarlandsfoss waterfall in southern Iceland could be"
@@ -24,12 +24,12 @@ my %expected =
         ~ " astrophotographer -- was influenced by a dream-like quality of the"
         ~ " resulting image, possibly combined with the knowledge that some"
         ~ " things really mattered in this effort to make a dream come true.",
-    hdurl => "http://apod.nasa.gov/apod/image/1604/"
+    hdurl => "https://apod.nasa.gov/apod/image/1604/"
         ~ "AuroraFalls_Kristjansson_1920.jpg",
     media_type => "image",
     service_version => "v1",
     title => "Lucid Dreaming",
-    url => "http://apod.nasa.gov/apod/image/1604/"
+    url => "https://apod.nasa.gov/apod/image/1604/"
         ~ "AuroraFalls_Kristjansson_960.jpg";
 
 my NASA::APOD $apod .= new: key => 't/key'.IO.lines[0];
